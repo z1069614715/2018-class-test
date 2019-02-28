@@ -1,0 +1,36 @@
+题目链接：https://www.nowcoder.com/practice/ff518f3162c849b9a84d1fab8e7179be?tpId=90&tqId=30812&rp=2&ru=/ta/2018test&qru=/ta/2018test/question-ranking
+def Solve(n, k, d1, d2):
+    if IsLegal(d1, 0, d2, k) and IsBalance(d1, 0, d2, n - k):
+        return True
+    if IsLegal(0, d1, d1 - d2, k) and IsBalance(0, d1, d1 - d2, n - k):
+        return True
+    if IsLegal(0, d1, d1 + d2, k) and IsBalance(0, d1, d1 + d2, n - k):
+        return True
+    if IsLegal(d1 + d2, d2, 0, k) and IsBalance(d1 + d2, d2, 0, n - k):
+        return True
+    if IsLegal(d2 - d1, d2, 0, k) and IsBalance(d2 - d1, d2, 0, n - k):
+        return True
+    return False
+
+
+def IsLegal(x1, x2, x3, FinishMatch):
+    if x1 < 0 or x2 < 0 or x3 < 0:
+        return False
+    if (FinishMatch - (x1 + x2 + x3)) < 0:
+        return False
+    if (FinishMatch - (x1 + x2 + x3)) % 3 != 0:
+        return False
+    return True
+
+
+def IsBalance(x1, x2, x3, NotFinishMatch):
+    maxGoal = max(x1, x2, x3);
+    if (NotFinishMatch - (3 * maxGoal - x1 - x2 - x3)) >= 0 and (
+            NotFinishMatch - (3 * maxGoal - x1 - x2 - x3)) % 3 == 0:
+        return True
+    return False
+
+
+for i in range(int(input())):
+    n, k, d1, d2 = map(int, input().split())
+    print(('yes' if Solve(n, k, d1, d2) else 'no'))
