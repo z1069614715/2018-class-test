@@ -14,11 +14,7 @@ def Solve(n, k, d1, d2):
 
 
 def IsLegal(x1, x2, x3, FinishMatch):
-    if x1 < 0 or x2 < 0 or x3 < 0:
-        return False
-    if (FinishMatch - (x1 + x2 + x3)) < 0:
-        return False
-    if (FinishMatch - (x1 + x2 + x3)) % 3 != 0:
+    if x1 < 0 or x2 < 0 or x3 < 0 or (FinishMatch - (x1 + x2 + x3)) < 0 or (FinishMatch - (x1 + x2 + x3)) % 3 != 0:
         return False
     return True
 
